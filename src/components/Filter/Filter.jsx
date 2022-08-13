@@ -4,11 +4,9 @@ import { changeFilter, getFiltred } from 'redux/filterSlice';
 
 const Filter = () => {
   const dispatch = useDispatch();
-  const val = useSelector(state => state.filter);
-  console.log(val);
-  const onChange = e => {
-    console.log(e.currentTarget.value);
+  const val = useSelector(getFiltred);
 
+  const onChange = e => {
     dispatch(changeFilter(e.currentTarget.value));
   };
   return (

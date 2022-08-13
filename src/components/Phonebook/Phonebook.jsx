@@ -3,10 +3,11 @@ import {
   useGetContactsQuery,
   useAddContactMutation,
 } from 'redux/contactsSlice';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Label, Input, Submit } from './Phonebook.styled';
 
 export default function Phonebook() {
-  const { data, isFetching, isError } = useGetContactsQuery();
+  const { data } = useGetContactsQuery();
   const [createContact] = useAddContactMutation();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -37,11 +38,13 @@ export default function Phonebook() {
     if (
       data.find(contact => contact.name.toLowerCase() === name.toLowerCase())
     ) {
-      alert(`${name} is already in contacts`);
+      Notify.failure(`${name} is already in contacts`);
+      return;
     } else if (data.find(contact => contact.number === number)) {
-      alert(
+      Notify.failure(
         `this number: ${number} is in, you dont want to add one more time.`
       );
+      return;
     } else {
       const contact = {
         name: name,

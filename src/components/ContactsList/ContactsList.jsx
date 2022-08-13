@@ -1,6 +1,6 @@
 import ContactItem from '../ContactItem';
 
-export const ContactsList = ({ data }) => {
+const ContactsList = ({ data }) => {
   return (
     <ul>
       {data.map(contact => {
@@ -16,3 +16,5 @@ export const ContactsList = ({ data }) => {
     </ul>
   );
 };
+
+export default ContactsList;

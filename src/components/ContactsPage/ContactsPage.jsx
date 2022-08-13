@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import Section from '../Section';
 import { useGetContactsQuery } from 'redux/contactsSlice';
 import Phonebook from '../Phonebook';
-import { ContactsList } from 'components/ContactsList/ContactsList';
+import ContactsList from 'components/ContactsList';
 import Filter from '../Filter';
 import { getFiltred } from 'redux/filterSlice';
 
