@@ -4,11 +4,12 @@ import {
   useAddContactMutation,
 } from 'redux/contactsSlice';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Oval } from 'react-loader-spinner';
 import { Label, Input, Submit } from './Phonebook.styled';
 
 export default function Phonebook() {
   const { data } = useGetContactsQuery();
-  const [createContact] = useAddContactMutation();
+  const [createContact, { isLoading }] = useAddContactMutation();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -51,6 +52,7 @@ export default function Phonebook() {
         number: number,
       };
       createContact(contact);
+      Notify.success(`${name} has added to contacts successfully`);
       reset();
     }
   };
@@ -85,7 +87,21 @@ export default function Phonebook() {
           required
         />
       </Label>
-      <Submit type="submit"> Add contact </Submit>
+      <Submit type="submit" disabled={isLoading}>
+        {isLoading ? (
+          <Oval
+            ariaLabel="loading-indicator"
+            height={16}
+            width={48}
+            strokeWidth={10}
+            strokeWidthSecondary={10}
+            color="orange"
+            secondaryColor="yellow"
+          />
+        ) : (
+          'Add contact'
+        )}
+      </Submit>
     </form>
   );
 }
