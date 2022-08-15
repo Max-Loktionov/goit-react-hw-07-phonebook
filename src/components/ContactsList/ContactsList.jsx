@@ -1,9 +1,16 @@
+import { useMemo } from 'react';
 import ContactItem from '../ContactItem';
 
 const ContactsList = ({ data }) => {
+  const sortedContactsByName = useMemo(() => {
+    const sortedContacts = data.slice();
+    sortedContacts.sort((a, b) => a.name.localeCompare(b.name));
+    return sortedContacts;
+  }, [data]);
+
   return (
     <ul>
-      {data.map(contact => {
+      {sortedContactsByName.map(contact => {
         return (
           <ContactItem
             name={contact.name}
